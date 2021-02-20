@@ -2,6 +2,8 @@ import React from 'react';
 
 import classnames from 'classnames';
 
+import './Banner.scss';
+
 const Banner = () => {
   const classNames = classnames('banner');
 

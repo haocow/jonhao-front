@@ -5,19 +5,23 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import './App.css';
+import './App.scss';
 
-import Banner from "./components/Banner/Banner";
-import NotFoundPage from './pages/NotFoundPage';
+import Banner from './components/Banner/Banner';
+import Footer from './components/Footer/Footer';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
   return (
     <Router>
       <div className='App'>
         <Banner />
-        <Switch>
-          <Route component={NotFoundPage} />
-        </Switch>
+        <div className='content'>
+          <Switch>
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
+        <Footer />
       </div>
     </Router>
     // <div className="App">
