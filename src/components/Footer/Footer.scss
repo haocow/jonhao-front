@@ -1,4 +1,20 @@
+@import '../../css/colors';
+
 .footer {
+  align-items: center;
+  background-color: $hao-grey-300;
   bottom: 0;
-  height: 32px;
+  display: flex;
+  font-size: 12px;
+  height: 24px;
+  justify-content: space-between;
+  padding: 8px 16px;
+
+  &__left {
+    color: $hao-grey-500;
+  }
+
+  &__right {
+    color: $hao-grey-800;
+  }
 }

@@ -8,8 +8,9 @@ const NotFoundPage = () => {
 
   return (
     <div className={classNames}>
-      <div className='not-found--main'>404 NOT FOUND</div>
-      <div className='not-found--secondary'>Try reloading the page?</div>
+      <div className='not-found__item not-found--status'>404</div>
+      <div className='not-found__item not-found--status-desc'>NOT FOUND</div>
+      <div className='not-found__item not-found--message'>Perhaps you typed in the URL wrong?</div>
     </div>
   );
 }

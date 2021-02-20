@@ -1,0 +1,25 @@
+@import '../../css/colors';
+
+.header {
+  background-color: $hao-blue-grey-900;
+  color: $hao-white;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+}
+
+.header-logo {
+  align-items: center;
+  display: flex;
+  margin-left: 24px;
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 4px;
+  }
+
+  img {
+    height: 32px;
+  }
+}

@@ -1,4 +1,7 @@
+@import './css/colors.scss';
+
 body, html, #root, #app {
+  background-color: $hao-grey-200;
   height: 100%;
   padding: 0;
   margin: 0;

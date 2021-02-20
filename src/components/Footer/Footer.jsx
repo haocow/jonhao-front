@@ -7,7 +7,8 @@ const Footer = () => {
 
   return (
     <div className={classNames}>
-      I AM TECHNICALLY A FOOTER!
+      <div className='footer__left'>What do you think?</div>
+      <div className='footer__right'>Made by Jon & Joey</div>
     </div>
   );
 }
