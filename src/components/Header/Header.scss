@@ -1,5 +1,10 @@
 @import '../../css/colors';
 
+a {
+  color: $hao-white;
+  text-decoration: none;
+}
+
 .header {
   background-color: $hao-blue-grey-900;
   color: $hao-white;
@@ -11,6 +16,7 @@
 .header-logo {
   align-items: center;
   display: flex;
+  height: 100%;
   margin-left: 24px;
 
   &__title {
@@ -21,5 +27,29 @@
 
   img {
     height: 32px;
+  }
+}
+
+.header-tabs {
+  display: flex;
+  margin-left: 24px;
+  width: 100%;
+
+  .MuiTab {
+    &-wrapper {
+      font-size: 14px;
+      font-weight: bolder;
+    }
+  }
+
+  .MuiTabs {
+    &-fixed {
+      display: flex;
+      height: 100%;
+    }
+
+    &-indicator {
+      background-color: $hao-yellow-700;
+    }
   }
 }

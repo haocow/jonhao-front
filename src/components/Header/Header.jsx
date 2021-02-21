@@ -1,18 +1,21 @@
 import React from 'react';
-import classnames from 'classnames';
-import logo from '../../logo.png';
+import HeaderLogo from './subcomponents/HeaderLogo';
+import HeaderTabs from './subcomponents/HeaderTabs';
 
 import './Header.scss';
 
-const Header = () => {
-  const classNames = classnames('header');
+const tabs = [
+  {id: 'plateses', label: 'Plateses', path: '/plateses'},
+  {id: 'tests', label: 'Tests', path: '/tests'},
+]
 
+const Header = () => {
   return (
-    <div className={classNames}>
-      <div className='header-logo'>
-        <img alt="logo" src={logo} />
-        <div className='header-logo__title'>JonHao</div>
-      </div>
+    <div className='header'>
+      <HeaderLogo />
+      <HeaderTabs
+        tabs={tabs}
+      />
     </div>
   )
 };
