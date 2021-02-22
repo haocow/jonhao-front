@@ -6,7 +6,7 @@ import './Header.scss';
 
 const tabs = [
   {id: 'plateses', label: 'Plateses', path: '/plateses'},
-  {id: 'tests', label: 'Tests', path: '/tests'},
+  {id: 'eated', label: 'Eated', path: '/eated'},
 ]
 
 const Header = () => {

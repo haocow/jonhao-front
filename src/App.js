@@ -9,6 +9,7 @@ import './App.scss';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import EatedPage from './pages/EatedPage/EatedPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PlatesesPage from './pages/PlatesesPage/PlatesesPage';
 
@@ -19,6 +20,7 @@ const App = () => {
         <Header />
         <div className='content'>
           <Switch>
+            <Route path='/eated' component={EatedPage} />
             <Route path='/plateses' component={PlatesesPage} />
             <Route component={NotFoundPage} />
           </Switch>

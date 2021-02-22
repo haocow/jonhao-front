@@ -1,0 +1,16 @@
+@import '../../css/colors';
+
+.plateses {
+  &-inputs {
+    display: flex;
+
+    &__diners {
+      display: flex;
+
+      .MuiTextField-root {
+        margin-right: 8px;
+        min-width: fit-content;
+      }
+    }
+  }
+}
