@@ -51,6 +51,7 @@
       border: none;
       font-weight: bold;
       line-height: 16px;
+      min-width: 60px;
     }
 
     .MuiTableHead-root {
@@ -98,8 +99,8 @@
     }
 
     .item-name-col {
-      min-width: 210px;
       padding-left: 0px;
+      width: 240px;
     }
   }
 }

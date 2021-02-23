@@ -8,7 +8,7 @@ import './PlatesesPage.scss';
 const ENTER_KEY_CODE = 13;
 
 const PlatesesPage = () => {
-  const [diners, setDiners] = useState([]);
+  const [diners, setDiners] = useState([{name: 'You'}]);
   const [dinerText, setDinerText] = useState('');
   const [dinerTextError, setDinerTextError] = useState(false);
   const [dinerTextErrorMsg, setDinerTextErrorMsg] = useState('');
