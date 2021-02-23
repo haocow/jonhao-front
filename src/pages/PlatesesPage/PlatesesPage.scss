@@ -6,11 +6,100 @@
 
     &__diners {
       display: flex;
+      width: 100%;
 
       .MuiTextField-root {
+        height: fit-content;
         margin-right: 8px;
         min-width: fit-content;
       }
+
+      .plateses-inputs-diner-chips {
+        display: flex;
+        flex-wrap: wrap;
+
+        .MuiChip-root {
+          margin: 2px 4px;
+        }
+      }
+    }
+  }
+
+  &-content {
+    width: 100%;
+
+    &-foods {
+      border-right: $hao-grey-600;
+      width: 300px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .MuiTableCell-root {
+      padding: 4px;
+      text-align: center;
+    }
+
+    .MuiTableContainer-root {
+      overflow: visible;
+    }
+
+    .MuiTableCell-head {
+      border: none;
+      font-weight: bold;
+      line-height: 16px;
+    }
+
+    .MuiTableHead-root {
+      .item-name-header {
+        padding-left: 4px;
+        text-align: left;
+      }
+    }
+
+    .MuiTableRow-root {
+      font-size: 10px;
+
+      .Mui-checked {
+        color: $hao-blue-700;
+      }
+
+      .MuiTextField-root {
+        width: 100%;
+
+        .MuiInputBase-input {
+          font-size: 13px;
+          line-height: 20px;
+          padding: 6px 4px 4px 4px;
+        }
+      }
+    }
+
+    .input {
+      border: none;
+      padding: 4px;
+    }
+
+    .itemized-item {
+      cursor: pointer;
+    }
+
+    .selected {
+      background-color: $hao-grey-300;
+    }
+
+    .amount-col {
+      padding-right: 16px;
+      min-width: 52px;
+      width: 52px;
+    }
+
+    .item-name-col {
+      min-width: 210px;
+      padding-left: 0px;
     }
   }
 }
