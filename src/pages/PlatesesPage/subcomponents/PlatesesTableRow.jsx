@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import { TableCell, TableRow, TextField } from '@material-ui/core';
 
 import PlatesesRowCheckbox from './PlatesesRowCheckbox';
 
 const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, selected }) => {
+  const [amountError, setAmountError] = useState(false);
+
   const onRowAmountChange = (id, amount) => {
+    setAmountError(isNaN(Number(Number(amount).toFixed(2))));
     const updatedItems = getUpdatedItems({ id, amount })
     onChange(updatedItems);
   };
@@ -45,7 +48,7 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
   }
 
   const getDisplayAmount = (diner, amount, selected) => {
-    if (!amount || selected.size === 0 || !selected.has(diner.name)) {
+    if (!amount || selected.size === 0 || isNaN(Number(amount/selected.size)) || !selected.has(diner.name)) {
       return Number(0).toFixed(2);
     }
 
@@ -87,6 +90,7 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
       <TableCell className='input amount-col'>
         <TextField
           disabled={!name}
+          error={amountError}
           margin='none'
           onChange={(val) => onRowAmountChange(id, val.target.value)}
           variant='outlined'
