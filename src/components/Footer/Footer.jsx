@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div className={classNames}>
       <div className='footer__left'>What do you think?</div>
-      <div className='footer__right'>Made by Jon & Joey</div>
+      <div className='footer__right'>Made by Jon</div>
     </div>
   );
 }

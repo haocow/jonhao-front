@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { TableCell, TableRow, TextField } from '@material-ui/core';
+import { getCurrency, renderCurrency } from '../../../utils/currency';
 
 import PlatesesRowCheckbox from './PlatesesRowCheckbox';
 
-const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, selected }) => {
+export const getUpdatedShares = (amount, selected) => {
+  return {
+    first: calculateFirstShare(amount, selected) || 0.00,
+    rest: calculateBaseShare(amount, selected) || 0.00,
+  };
+}
+
+export const calculateBaseShare = (amount, selected) => {
+  if (selected.size === 0 || isNaN(Number(amount/selected.size))) {
+    return getCurrency(0);
+  }
+
+  return getCurrency(amount/selected.size);
+}
+
+export const calculateFirstShare = (amount, selected) => {
+  const baseShare = calculateBaseShare(amount, selected);
+  return getCurrency(baseShare + (amount - (baseShare * selected.size)));
+}
+
+const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, selected, shares }) => {
   const [amountError, setAmountError] = useState(false);
 
   const onRowAmountChange = (id, amount) => {
-    setAmountError(isNaN(Number(Number(amount).toFixed(2))));
-    const updatedItems = getUpdatedItems({ id, amount })
+    setAmountError(isNaN(getCurrency(amount)));
+    const shares = getUpdatedShares(amount, selected);
+    const updatedItems = getUpdatedItems({ id, amount, shares })
     onChange(updatedItems);
   };
 
@@ -27,41 +49,33 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
     const newSet = new Set(selected);
     let updates = {};
 
-    if (selected.has(diner.name)) {
+    if (!selected.has(diner.name)) {
+      newSet.add(diner.name);
+      if (newSet.size === diners.length) {
+        updates.checked = true;
+      }
+    } else {
       newSet.delete(diner.name);
       updates.checked = false;
-    } else {
-      newSet.add(diner.name);
     }
     updates.selected = newSet;
+    updates.shares = getUpdatedShares(amount, newSet);
     onChange(getUpdatedItems({ id, ...updates }))
   }
 
   const onCheckboxClick = (id, checked) => {
-    let updates = {checked: checked};
+    let updates = {checked: checked};;
     if (checked) {
       updates.selected = new Set(diners.map((diner) => diner.name));
     } else {
       updates.selected = new Set();
     }
+    updates.shares = getUpdatedShares(amount, updates.selected);
     onChange(getUpdatedItems({ id, ...updates }))
   }
 
-  const getDisplayAmount = (diner, amount, selected) => {
-    if (!amount || selected.size === 0 || isNaN(Number(amount/selected.size)) || !selected.has(diner.name)) {
-      return Number(0).toFixed(2);
-    }
-
-    let share = Number(Number(amount/selected.size).toFixed(2));
-    if (diner === getFirstSelectedDiner()) {
-      share += (amount - (share * selected.size));
-    }
-
-    return share.toFixed(2);
-  }
-
   const getNewItem = (id) => {
-    return { amount: '', checked: false, id, name: '', selected: new Set() };
+    return { amount: '', checked: false, id, name: '', selected: new Set(), shares: {first: 0.00, rest: 0.00} };
   }
 
   const getUpdatedItems = ({id, ...updates}) => {
@@ -81,7 +95,7 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
       <TableCell className='input item-name-col'>
         <TextField
           margin='none'
-          onChange={(val) => onRowNameChange(id, val.target.value)}
+          onChange={val => onRowNameChange(id, val.target.value)}
           placeholder='Description'
           value={name}
           variant='outlined'
@@ -92,12 +106,17 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
           disabled={!name}
           error={amountError}
           margin='none'
-          onChange={(val) => onRowAmountChange(id, val.target.value)}
+          onChange={val => onRowAmountChange(id, val.target.value)}
           variant='outlined'
           value={amount}
         />
       </TableCell>
       {diners.map((diner) => {
+        const first = getFirstSelectedDiner();
+        const share = selected.has(diner.name) ?
+          (diner.name === first.name ? shares.first : shares.rest) :
+          0;
+
         const classNames = classnames(
           'itemized-item',
           {
@@ -112,7 +131,7 @@ const PlatesesTableRow = ({ amount, checked, diners, id, items, name, onChange, 
               border: `1px solid`,
             }}
           >
-            {getDisplayAmount(diner, amount, selected)}
+            {renderCurrency(share)}
           </TableCell>
         );
       })}
